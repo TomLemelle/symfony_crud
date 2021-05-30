@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block body %}
+    <h3>Home page</h3>
+
+    <a href="{{ path('product_index') }}" class="btn btn-primary my-2">Products management</a>
+    <a href="{{ path('order_index') }}" class="btn btn-primary my-2">Orders management</a>
+{% endblock %}

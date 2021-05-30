@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product index{% endblock %}
+
+{% block body %}
+    <h1>Product index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>DepositDate</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.depositDate ? product.depositDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('product_show', {'id': product.id}) }}" class="btn btn-primary mr-1">show</a>
+                    <a href="{{ path('product_edit', {'id': product.id}) }}" class="btn btn-secondary">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('product_new') }}" class="btn btn-secondary my-2">Create new</a>
+    <a href="{{ path('home_index') }}" class="btn btn-primary my-2">Home page</a>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Order index{% endblock %}
+
+{% block body %}
+    <h1>Order index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Adress</th>
+                <th>OrderContent</th>
+                <th>OrderDate</th>
+                <th>Product</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.firstName }}</td>
+                <td>{{ order.lastName }}</td>
+                <td>{{ order.adress }}</td>
+                <td>{{ order.orderContent }}</td>
+                <td>{{ order.orderDate ? order.orderDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    {% for product in order.product %}
+                        {{ product.name }}
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="{{ path('order_show', {'id': order.id}) }}" class="btn btn-primary mr-1">show</a>
+                    <a href="{{ path('order_edit', {'id': order.id}) }}" class="btn btn-secondary">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('order_new') }}" class="btn btn-secondary my-2">Create new</a>
+    <a href="{{ path('home_index') }}" class="btn btn-primary my-2">Home page</a>
+{% endblock %}
